@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Register</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      background: #ffffff15;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 400px;
+      transition: all 0.4s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    input::placeholder {
+      color: #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0dcaf0;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0bb5d4;
+    }
+
+    .toggle-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .toggle-link a {
+      color: #17c964;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 0.85em;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="auth-container">
+    <!-- Login Form -->
+    <div id="login-form">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="login-username" placeholder="Enter username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Enter password" />
+      </div>
+      <button onclick="handleLogin()">Login</button>
+      <p class="error" id="login-error"></p>
+      <div class="toggle-link">
+        Don't have an account? <a onclick="toggleForm('register')">Register here</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form" class="hidden">
+      <h2>Register</h2>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="reg-name" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="example@mail.com" />
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="reg-username" placeholder="Choose a username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="Create a password" />
+      </div>
+      <button onclick="handleRegister()">Register</button>
+      <p class="error" id="reg-error"></p>
+      <div class="toggle-link">
+        Already have an account? <a onclick="toggleForm('login')">Login here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleForm(view) {
+      const loginForm = document.getElementById("login-form");
+      const regForm = document.getElementById("register-form");
+      if (view === 'register') {
+        loginForm.classList.add("hidden");
+        regForm.classList.remove("hidden");
+      } else {
+        loginForm.classList.remove("hidden");
+        regForm.classList.add("hidden");
+      }
+    }
+
+    function handleLogin() {
+      const username = document.getElementById("login-username").value;
+      const password = document.getElementById("login-password").value;
+      const error = document.getElementById("login-error");
+
+      if (!username || !password) {
+        error.textContent = "Please fill all fields.";
+      } else {
+        error.textContent = "";
+        alert("Logged in successfully! (demo)");
+      }
+    }
+
+    function handleRegister() {
+      const name = document.getElementById("reg-name").value;
+      const email = document.getElementById("reg-email").value;
+      const username = document.getElementById("reg-username").value;
+      const password = document.getElementById("reg-password").value;
+      const error = document.getElementById("reg-error");
+
+      if (!name || !email || !username || !password) {
+        error.textContent = "All fields are required.";
+      } else {
+        error.textContent = "";
+        alert("Registered successfully! (demo)");
+        toggleForm('login');
+      }
+    }
+  </script>
+</body>
+</html>
